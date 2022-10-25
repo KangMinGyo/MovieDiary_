@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
-        let navController = UINavigationController(rootViewController: BoxOfficeViewController())
+        let navController = UINavigationController(rootViewController: MovieReviewListViewController())
 
         window?.rootViewController = navController
         window?.makeKeyAndVisible()

@@ -41,7 +41,7 @@ class BoxOfficeService {
     }
     
     func getBoxOfficeData(date: String) async throws -> BoxOfficeData {
-        let url = URL(string: "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=\(apiKey)&targetDt=\(date)&wideAreaCd=0105001")
+        let url = URL(string: "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=\(apiKey)&targetDt=\(date)")
         guard let url = url else { throw NetworkError.badUrl }
         let (data, response) = try await URLSession.shared.data(from: url)
         guard let statusCode = (response as? HTTPURLResponse)?.statusCode else { throw NetworkError.badUrl }
