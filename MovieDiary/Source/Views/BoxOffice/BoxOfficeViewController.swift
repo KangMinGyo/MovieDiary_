@@ -1,8 +1,8 @@
 //
-//  ViewController.swift
-//  BoxOffice
+//  BoxOfficeViewController.swift
+//  MovieDiary
 //
-//  Created by kjs on 2022/10/14.
+//  Created by KangMingyo on 2022/10/24.
 //
 
 import UIKit
@@ -39,6 +39,7 @@ class BoxOfficeViewController: UIViewController {
                 let movieResponse = try await BoxOfficeService().getBoxOfficeData(date: boxOfficeHelper.yesterdayDate())
                 boxOfficeDataList.append(contentsOf: movieResponse.boxOfficeResult.dailyBoxOfficeList)
                 boxOfficeView.boxOfficeTableView.reloadData()
+                print(boxOfficeDataList[0].audiAcc)
                 for index in 0..<boxOfficeDataList.count {
                     let movieCode = boxOfficeDataList[index].movieCd
                     let movieDetailResponse = try await BoxOfficeService().getMovieDetailData(movieCode: movieCode).movieInfoResult.movieInfo

@@ -1,8 +1,8 @@
 //
 //  BoxOfficeTableViewCell.swift
-//  BoxOffice
+//  MovieDiary
 //
-//  Created by KangMingyo on 2022/10/18.
+//  Created by KangMingyo on 2022/10/24.
 //
 
 import UIKit
