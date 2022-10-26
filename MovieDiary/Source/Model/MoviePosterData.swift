@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct MoviePosterData : Codable {
+struct MoviePosterData: Codable {
     let results : [Results]
 }
 
-struct Results : Codable {
+struct Results: Codable {
     let poster_path : String?
 }

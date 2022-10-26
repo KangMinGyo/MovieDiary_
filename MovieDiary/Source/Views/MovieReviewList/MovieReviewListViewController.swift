@@ -9,6 +9,11 @@ import UIKit
 
 class MovieReviewListViewController: UIViewController {
     
+    lazy var movieSearchButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(movieSearchButtonPressed))
+        return button
+    }()
+    
     lazy var boxOfficeButton: UIBarButtonItem = {
         let button = UIBarButtonItem(image: UIImage(systemName: "chart.bar"), style: .plain, target: self, action: #selector(boxOfficeButtonPressed))
         return button
@@ -24,7 +29,7 @@ class MovieReviewListViewController: UIViewController {
         super.viewDidLoad()
         
         title = "영화 리뷰 목록"
-        navigationItem.rightBarButtonItem = boxOfficeButton
+        navigationItem.rightBarButtonItems = [boxOfficeButton, movieSearchButton]
 
         addSubView()
         configure()
@@ -39,6 +44,11 @@ class MovieReviewListViewController: UIViewController {
     
     @objc func boxOfficeButtonPressed() {
         let nextVC = BoxOfficeViewController()
+        self.show(nextVC, sender: self)
+    }
+    
+    @objc func movieSearchButtonPressed() {
+        let nextVC = MovieSearchViewController()
         self.show(nextVC, sender: self)
     }
     

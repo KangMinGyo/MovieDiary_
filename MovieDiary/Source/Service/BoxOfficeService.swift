@@ -71,4 +71,16 @@ class BoxOfficeService {
         let result = try JSONDecoder().decode(MoviePosterData.self, from: data)
         return result
     }
+    
+    func getSearchData(movieName: String) async throws -> MovieSearchData {
+        var url = String("https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=\(apiKey)&movieNm=\(movieName)")
+        url = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let searchURL = URL(string: url)
+        guard let url = searchURL else { throw NetworkError.badUrl }
+        let (data, response) = try await URLSession.shared.data(from: url)
+        guard let statusCode = (response as? HTTPURLResponse)?.statusCode else { throw NetworkError.badUrl }
+        guard statusCode == 200 else {throw NetworkError.badUrl}
+        let result = try JSONDecoder().decode(MovieSearchData.self, from: data)
+        return result
+    }
 }
