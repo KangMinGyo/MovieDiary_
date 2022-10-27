@@ -26,13 +26,12 @@ class MovieSearchViewController: UIViewController {
         configure()
         setupTableView()
         setUpSearchBar()
-        fetchData()
     }
     
-    func fetchData() {
+    func fetchData(_ movieName: String) {
         Task {
             do {
-                let searchResponse = try await BoxOfficeService().getSearchData(movieName: "메멘토")
+                let searchResponse = try await BoxOfficeService().getSearchData(movieName: movieName)
                 movieSearchList.append(contentsOf: searchResponse.movieListResult.movieList)
                 print(movieSearchList)
             } catch {
@@ -86,10 +85,24 @@ extension MovieSearchViewController: UITableViewDelegate, UITableViewDataSource 
         cell.directorLabel.text = "감독 : \(MovieSearchHelper().directorNameHelper(data.directors))"
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //셀 누르면
+        let nextVC = ReviewWriteViewController()
+        let data = self.movieSearchList[indexPath.row]
+        nextVC.movieName = data.movieNm
+        self.show(nextVC, sender: self)
+    }
 }
 
 extension MovieSearchViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        movieSearchView.movieSearchTableView.reloadData()
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let movieName = searchBar.text
+        
+        movieSearchList = [MovieList]()
+        fetchData(movieName ?? "")
+        
+        //검색 완료시 키보드 내리기
+        searchBar.resignFirstResponder()
     }
 }
