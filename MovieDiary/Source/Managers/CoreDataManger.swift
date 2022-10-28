@@ -47,6 +47,9 @@ class CoreDataManger: CoreDataManagerProtocol {
     
     func fetchReviewMataData(start: Int) throws -> [ReviewMetaData] {
         let request = ReviewMetaData.fetchRequest()
+        let sortByDateDesc = NSSortDescriptor(key: "date", ascending: false)
+        request.sortDescriptors = [sortByDateDesc]
+        
         let result = try self.context.fetch(request)
         return result
     }
