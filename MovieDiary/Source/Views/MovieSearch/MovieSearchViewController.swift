@@ -91,6 +91,7 @@ extension MovieSearchViewController: UITableViewDelegate, UITableViewDataSource 
         let nextVC = ReviewWriteViewController()
         let data = self.movieSearchList[indexPath.row]
         nextVC.movieName = data.movieNm
+        nextVC.movieInfo = data.movieInfo
         self.show(nextVC, sender: self)
     }
 }

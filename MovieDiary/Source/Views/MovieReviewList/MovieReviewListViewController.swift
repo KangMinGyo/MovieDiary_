@@ -9,31 +9,66 @@ import UIKit
 
 class MovieReviewListViewController: UIViewController {
     
-    lazy var movieSearchButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(movieSearchButtonPressed))
-        return button
-    }()
-    
-    lazy var boxOfficeButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(image: UIImage(systemName: "chart.bar"), style: .plain, target: self, action: #selector(boxOfficeButtonPressed))
-        return button
-    }()
+    var reviewMetaDatas = [ReviewMetaData]()
     
     let movieReviewListView: MovieReviewListView = {
         let view = MovieReviewListView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    let formatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateStyle = .long
+        f.timeStyle = .short
+        f.locale = Locale(identifier: "ko_kr")
+        return f
+    }()
+    
+    lazy var movieSearchButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"),
+                                     style: .plain,
+                                     target: self,
+                                     action: #selector(movieSearchButtonPressed))
+        button.tintColor = .gray
+        return button
+    }()
+    
+    lazy var boxOfficeButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(image: UIImage(systemName: "chart.bar"),
+                                     style: .plain,
+                                     target: self,
+                                     action: #selector(boxOfficeButtonPressed))
+        button.tintColor = .gray
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "영화 리뷰 목록"
+        title = "리뷰 목록"
         navigationItem.rightBarButtonItems = [boxOfficeButton, movieSearchButton]
 
         addSubView()
         configure()
         setupTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        reviewMetaDatas = [ReviewMetaData]()
+        loadData()
+    }
+    
+    func loadData() {
+        ReviewManager.shared.loadReviews(start: 0) { result in
+            switch result {
+            case .success(let metaDatas):
+                self.reviewMetaDatas.append(contentsOf: metaDatas)
+                self.movieReviewListView.MovieReviewListTableView.reloadData()
+            case .failure(let error):
+                debugPrint(error.localizedDescription)
+            }
+        }
     }
     
     func setupTableView() {
@@ -65,19 +100,42 @@ class MovieReviewListViewController: UIViewController {
             movieReviewListView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-
 }
 
 extension MovieReviewListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return reviewMetaDatas.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewCell", for: indexPath) as! MovieReviewListTableViewCell
-        
+        let data = reviewMetaDatas[indexPath.row]
+        cell.movieNameLabel.text = data.title
+        cell.movieInfoLabel.text = data.movieInfo
+        cell.recordDateLabel.text = formatter.string(from: data.date!)
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let nextVC = MovieReviewDetailViewController()
+        let data = reviewMetaDatas[indexPath.row]
+        nextVC.title = data.title
+        nextVC.movieReviewDetailView.reviewTextView.text = data.contents
+        self.show(nextVC, sender: self)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            ReviewManager.shared.deleteReview(data: reviewMetaDatas[indexPath.row]) { result in
+                switch result {
+                case .success:
+                    self.reviewMetaDatas.remove(at: indexPath.row)
+                case .failure(let error):
+                    debugPrint(error.localizedDescription)
+                }
+                self.movieReviewListView.MovieReviewListTableView.deleteRows(at: [indexPath], with: .fade)
+            }
+        }
+    }
 }

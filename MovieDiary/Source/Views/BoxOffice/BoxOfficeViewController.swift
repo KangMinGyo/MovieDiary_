@@ -99,7 +99,7 @@ extension BoxOfficeViewController: UITableViewDelegate, UITableViewDataSource {
 
         cell.movieName.text = data.movieNm
         cell.openDate.text = data.openDt
-        cell.boxOfficeRank.text = "\(data.rank)(\(data.rankOldAndNew))"
+        cell.boxOfficeRank.text = "\(data.rank)"
         cell.rankInten.text = boxOfficeHelper.rankIntenCal(data.rankInten)
         cell.audiAcc.text = boxOfficeHelper.audiAccCal(data.audiAcc)
 

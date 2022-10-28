@@ -11,34 +11,48 @@ class MovieSearchTableViewCell: UITableViewCell {
     
     let movieNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "영화이름"
+        label.font = .systemFont(ofSize: 17)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let movieNameEnLabel: UILabel = {
         let label = UILabel()
-        label.text = "movieName"
+        label.textColor = .systemGray2
+        label.font = .systemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     let movieInfoLabel: UILabel = {
         let label = UILabel()
-        label.text = "한국|액션|2021"
+        label.textColor = .systemGray2
+        label.font = .systemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     let directorLabel: UILabel = {
         let label = UILabel()
-        label.text = "개굴쓰"
+        label.font = .systemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 5
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        [movieNameLabel, movieNameEnLabel, movieInfoLabel, directorLabel].forEach {
+            self.stackView.addArrangedSubview($0)
+        }
 
         addView()
         configure()
@@ -48,25 +62,14 @@ class MovieSearchTableViewCell: UITableViewCell {
     }
     
     func addView() {
-        addSubview(movieNameLabel)
-        addSubview(movieNameEnLabel)
-        addSubview(movieInfoLabel)
-        addSubview(directorLabel)
+        addSubview(stackView)
     }
     
     func configure() {
         NSLayoutConstraint.activate([
-            movieNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            movieNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             
-            movieNameEnLabel.topAnchor.constraint(equalTo: movieNameLabel.bottomAnchor, constant: 5),
-            movieNameEnLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            
-            movieInfoLabel.topAnchor.constraint(equalTo: movieNameEnLabel.bottomAnchor, constant: 5),
-            movieInfoLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-
-            directorLabel.topAnchor.constraint(equalTo: movieInfoLabel.bottomAnchor, constant: 5),
-            directorLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            stackView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
 }

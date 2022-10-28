@@ -11,28 +11,42 @@ class MovieReviewListTableViewCell: UITableViewCell {
     
     let movieNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "movieName"
+        label.font = .systemFont(ofSize: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     let movieInfoLabel: UILabel = {
         let label = UILabel()
-        label.text = "한국|2021"
+        label.textColor = .systemGray2
+        label.font = .systemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     let recordDateLabel: UILabel = {
         let label = UILabel()
-        label.text = "2022.10.24"
+        label.textColor = .systemGray2
+        label.font = .systemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
+        [movieNameLabel, movieInfoLabel, recordDateLabel].forEach {
+            self.stackView.addArrangedSubview($0)
+        }
         addView()
         configure()
     }
@@ -41,21 +55,14 @@ class MovieReviewListTableViewCell: UITableViewCell {
     }
     
     func addView() {
-        addSubview(movieNameLabel)
-        addSubview(movieInfoLabel)
-        addSubview(recordDateLabel)
+        addSubview(stackView)
     }
     
     func configure() {
         NSLayoutConstraint.activate([
-            movieNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            movieNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             
-            movieInfoLabel.topAnchor.constraint(equalTo: movieNameLabel.bottomAnchor, constant: 5),
-            movieInfoLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            
-            recordDateLabel.topAnchor.constraint(equalTo: movieInfoLabel.bottomAnchor, constant: 5),
-            recordDateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            stackView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
 }

@@ -13,13 +13,24 @@ class ReviewWriteView: UIView {
         let button = UIButton(type: UIButton.ButtonType.system)
         button.backgroundColor = .systemBackground
         button.setTitle("이 영화에 대해 평가해주세요.", for: UIControl.State.normal)
+        button.tintColor = .black
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
+    let reviewLabel: UILabel = {
+        let label = UILabel()
+        label.text = "나의 리뷰"
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     let reviewTextView: UITextView = {
         let textView = UITextView()
-        textView.text = "리뷰를 입력해주세요"
+        textView.text = "내용을 입력해주세요."
+        textView.textColor = .lightGray
+        textView.backgroundColor = .systemGray6
         textView.isScrollEnabled = false
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
@@ -37,6 +48,7 @@ class ReviewWriteView: UIView {
     
     func addView() {
         addSubview(rateButton)
+        addSubview(reviewLabel)
         addSubview(reviewTextView)
     }
     
@@ -47,10 +59,13 @@ class ReviewWriteView: UIView {
             rateButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             rateButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             
-            reviewTextView.topAnchor.constraint(equalTo: rateButton.bottomAnchor),
+            reviewLabel.topAnchor.constraint(equalTo: rateButton.bottomAnchor, constant: 20),
+            reviewLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            
+            reviewTextView.topAnchor.constraint(equalTo: reviewLabel.bottomAnchor, constant: 5),
             reviewTextView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             reviewTextView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            reviewTextView.heightAnchor.constraint(equalToConstant: 400)
+            reviewTextView.heightAnchor.constraint(equalToConstant: 200)
         ])
     }
 }

@@ -32,14 +32,12 @@ class BoxOfficeDetailsViewController: UIViewController {
     func setupLabels() {
         let data = boxOfficeDataList[index ?? 0]
         let detailData = movieDetailDataList[index ?? 0]
-        boxOfficeDetailsView.auditsImageView.image = UIImage(named: "\(boxOfficeHelper.auditsImage(detailData.audits[0].watchGradeNm))")
         boxOfficeDetailsView.movieName.text = detailData.movieNm
         boxOfficeDetailsView.movieNameEn.text = detailData.movieNmEn
         boxOfficeDetailsView.genres.text = "\(detailData.genres[0].genreNm) | "
-        boxOfficeDetailsView.openDate.text = "\(data.openDt) 개봉 | "
+        boxOfficeDetailsView.openDate.text = "\(data.openDt) 개봉"
         boxOfficeDetailsView.showTime.text = "\(detailData.showTm)분"
-        boxOfficeDetailsView.prdtYear.text = "\(detailData.prdtYear)년 제작"
-        boxOfficeDetailsView.boxOfficeRank.text = "\(data.rank)(\(data.rankOldAndNew))"
+        boxOfficeDetailsView.boxOfficeRank.text = "\(data.rank)"
         boxOfficeDetailsView.rankInten.text = boxOfficeHelper.rankIntenCal(data.rankInten)
         boxOfficeDetailsView.audiAcc.text = boxOfficeHelper.audiAccCal(data.audiAcc)
         boxOfficeDetailsView.directorName.text = detailData.directors[0].peopleNm

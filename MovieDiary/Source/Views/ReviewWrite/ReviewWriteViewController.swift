@@ -9,11 +9,17 @@ import UIKit
 
 class ReviewWriteViewController: UIViewController {
     
-    let movieName = ""
+    var movieName = ""
+    var contents = ""
+    var movieInfo = ""
     var eval = ""
     
     lazy var registerButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(title: "등록", style: .plain, target: self, action: #selector(registerButtonPressed))
+        let button = UIBarButtonItem(title: "등록",
+                                     style: .plain,
+                                     target: self,
+                                     action: #selector(registerButtonPressed))
+        button.tintColor = .red
         return button
     }()
     
@@ -29,11 +35,16 @@ class ReviewWriteViewController: UIViewController {
         title = movieName
         view.backgroundColor = .white
         navigationItem.rightBarButtonItem = registerButton
+        reviewWriteView.reviewTextView.delegate = self
         
         addSubView()
         configure()
         
         reviewWriteView.rateButton.addTarget(self, action: #selector(reteButtonPressed), for: .touchUpInside)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
     
     @objc func reteButtonPressed() {
@@ -68,21 +79,18 @@ class ReviewWriteViewController: UIViewController {
     }
     
     @objc func registerButtonPressed() {
+        contents = reviewWriteView.reviewTextView.text
+
         //리뷰 등록
-//        let metaData = try CoreDataManager.shared.createNewVideoMetaData(
-//            name: name,
-//            createdAt: Date(),
-//            videoPath: path,
-//            thumbnail: thumbnail,
-//            videoLength: asset.duration.seconds)
-//        try CoreDataManager.shared.insertVideoMetaData(metaData)
-        
-        let mataData = try CoreDataManger.shared.createNewReview(
-            title: movieName,
-            contents: <#T##String#>,
-            movieInfo: <#T##String#>,
-            eval: eval)
-        try CoreDataManger.shared.insertReviewMataData(mataData)
+        ReviewManager.shared.saveReview(title: movieName, contents: contents, movieInfo: movieInfo, eval: eval) { result in
+            switch result {
+            case .success(let mataData):
+                print(mataData)
+            case .failure(let error):
+                debugPrint(error.localizedDescription)
+            }
+        }
+        self.navigationController?.popToRootViewController(animated: true)
     }
 
     func addSubView() {
@@ -97,5 +105,22 @@ class ReviewWriteViewController: UIViewController {
             reviewWriteView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             reviewWriteView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+}
+
+extension ReviewWriteViewController: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if reviewWriteView.reviewTextView.textColor == UIColor.lightGray {
+            reviewWriteView.reviewTextView.text = ""
+            reviewWriteView.reviewTextView.textColor = UIColor.black
+            }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if reviewWriteView.reviewTextView.text.isEmpty {
+            reviewWriteView.reviewTextView.text = "내용을 입력해주세요."
+            reviewWriteView.reviewTextView.textColor = UIColor.lightGray
+            }
     }
 }

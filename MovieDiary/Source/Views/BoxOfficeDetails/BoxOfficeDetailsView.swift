@@ -15,14 +15,7 @@ class BoxOfficeDetailsView: UIView {
          imageView.translatesAutoresizingMaskIntoConstraints = false
          return imageView
      }()
-    
-    //관람등급
-    let auditsImageView: UIImageView = {
-         let imageView = UIImageView()
-         imageView.translatesAutoresizingMaskIntoConstraints = false
-         return imageView
-     }()
-    
+
     let movieName: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15, weight: .bold)
@@ -57,13 +50,6 @@ class BoxOfficeDetailsView: UIView {
     }()
     
     let showTime: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 15)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    let prdtYear: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -223,13 +209,11 @@ class BoxOfficeDetailsView: UIView {
 
     func addView() {
         addSubview(posterImageView)
-        addSubview(auditsImageView)
         addSubview(movieName)
         addSubview(movieNameEn)
         addSubview(genres)
         addSubview(openDate)
         addSubview(showTime)
-        addSubview(prdtYear)
         
         addSubview(lineView)
         lineView.addSubview(movieInfoStackView)
@@ -250,13 +234,8 @@ class BoxOfficeDetailsView: UIView {
             posterImageView.heightAnchor.constraint(equalToConstant: 130),
             posterImageView.widthAnchor.constraint(equalToConstant: 90),
 
-            auditsImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
-            auditsImageView.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 20),
-            auditsImageView.widthAnchor.constraint(equalToConstant: 20),
-            auditsImageView.heightAnchor.constraint(equalToConstant: 20),
-            
             movieName.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
-            movieName.leadingAnchor.constraint(equalTo: auditsImageView.trailingAnchor, constant: 5),
+            movieName.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 20),
             movieName.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
             movieNameEn.topAnchor.constraint(equalTo: movieName.bottomAnchor, constant: 5),
@@ -271,10 +250,7 @@ class BoxOfficeDetailsView: UIView {
             
             openDate.topAnchor.constraint(equalTo: genres.bottomAnchor, constant: 5),
             openDate.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 20),
-                        
-            prdtYear.topAnchor.constraint(equalTo: genres.bottomAnchor, constant: 5),
-            prdtYear.leadingAnchor.constraint(equalTo: openDate.trailingAnchor),
-            
+
             lineView.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 10),
             lineView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
             lineView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),

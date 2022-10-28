@@ -15,14 +15,6 @@ class BoxOfficeTableViewCell: UITableViewCell {
          return imageView
      }()
     
-    //신규진입여부
-    let rankOldAndNew: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 10)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
     //영화 이름
     let movieName: UILabel = {
         let label = UILabel()
@@ -157,7 +149,6 @@ class BoxOfficeTableViewCell: UITableViewCell {
     
     func addView() {
         addSubview(posterImageView)
-        addSubview(rankOldAndNew)
         addSubview(movieName)
         addSubview(openDate)
         addSubview(lineView)
@@ -170,9 +161,6 @@ class BoxOfficeTableViewCell: UITableViewCell {
             posterImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             posterImageView.heightAnchor.constraint(equalToConstant: 120),
             posterImageView.widthAnchor.constraint(equalToConstant: 80),
-            
-            rankOldAndNew.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            rankOldAndNew.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 20),
             
             movieName.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             movieName.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 20),
