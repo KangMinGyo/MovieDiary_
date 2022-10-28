@@ -19,12 +19,10 @@ struct MovieInfo: Codable {
     let movieNm: String
     let movieNmEn: String
     let showTm: String //상영시간
-    let prdtYear: String //제작연도
     let openDt: String //개봉날짜
     let genres: [Genres] //장르
     let directors: [Directors] //감독
     let actors: [Actors] //배우
-    let audits: [Audits] //관람등급
 }
 
 struct Genres: Codable {
