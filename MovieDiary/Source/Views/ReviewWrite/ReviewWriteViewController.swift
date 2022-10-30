@@ -80,17 +80,34 @@ class ReviewWriteViewController: UIViewController {
     
     @objc func registerButtonPressed() {
         contents = reviewWriteView.reviewTextView.text
-
-        //리뷰 등록
-        ReviewManager.shared.saveReview(title: movieName, contents: contents, movieInfo: movieInfo, eval: eval) { result in
-            switch result {
-            case .success(let mataData):
-                print(mataData)
-            case .failure(let error):
-                debugPrint(error.localizedDescription)
+        
+        if contents.isEmpty || contents == "내용을 입력해주세요." {
+            let alert = UIAlertController(title: "잠깐!", message: "나의 리뷰를 입력해주세요", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "OK", style: .default) { (ok) in
             }
+            alert.addAction(ok)
+            self.present(alert, animated: true, completion: nil)
+            return
         }
-        self.navigationController?.popToRootViewController(animated: true)
+        
+        if eval == "" {
+            let alert = UIAlertController(title: "잠깐!", message: "영화 평가를 해주세요", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "OK", style: .default) { (ok) in
+            }
+            alert.addAction(ok)
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            //리뷰 등록
+            ReviewManager.shared.saveReview(title: movieName, contents: contents, movieInfo: movieInfo, eval: eval) { result in
+                switch result {
+                case .success(let mataData):
+                    print(mataData)
+                case .failure(let error):
+                    debugPrint(error.localizedDescription)
+                }
+            }
+            self.navigationController?.popToRootViewController(animated: true)
+        }
     }
 
     func addSubView() {

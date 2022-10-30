@@ -223,13 +223,12 @@
 		8CDB8A982906C6420088D972 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8CDB8AE2290D6E090088D972 /* Helpers */,
 				8CDB8A692906C30A0088D972 /* MovieDiary.xcdatamodeld */,
 				8CDB8A992906C6420088D972 /* MovieDetailData.swift */,
-				8CDB8A9A2906C6420088D972 /* BoxOfficeHelper.swift */,
 				8CDB8A9B2906C6420088D972 /* MoviePosterData.swift */,
 				8CDB8A9C2906C6420088D972 /* BoxOfficeData.swift */,
 				8CDB8AC62908259F0088D972 /* MovieSearchData.swift */,
-				8CDB8AC8290837980088D972 /* MovieSearchHelper.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -328,6 +327,15 @@
 				8CDB8ADE290C05620088D972 /* MovieReviewDetailViewController.swift */,
 			);
 			path = MovieReviewDetail;
+			sourceTree = "<group>";
+		};
+		8CDB8AE2290D6E090088D972 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8CDB8A9A2906C6420088D972 /* BoxOfficeHelper.swift */,
+				8CDB8AC8290837980088D972 /* MovieSearchHelper.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

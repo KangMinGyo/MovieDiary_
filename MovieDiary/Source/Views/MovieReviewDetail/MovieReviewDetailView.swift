@@ -18,9 +18,17 @@ class MovieReviewDetailView: UIView {
     
     let reviewTextView: UITextView = {
         let textView = UITextView()
+        textView.backgroundColor = .systemGray6
         textView.isScrollEnabled = false
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
+    }()
+    
+    let reviewView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     let evalLabel: UILabel = {
@@ -52,6 +60,7 @@ class MovieReviewDetailView: UIView {
     func addView() {
         addSubview(reviewLabel)
         addSubview(reviewTextView)
+        addSubview(reviewView)
         addSubview(evalLabel)
         addSubview(evalImageView)
     }
@@ -61,8 +70,15 @@ class MovieReviewDetailView: UIView {
             reviewLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
             reviewLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
             
-            reviewTextView.topAnchor.constraint(equalTo: reviewLabel.bottomAnchor, constant: 20),
+            reviewView.topAnchor.constraint(equalTo: reviewLabel.bottomAnchor, constant: 5),
+            reviewView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            reviewView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            reviewView.heightAnchor.constraint(equalToConstant: 200),
+            
+            reviewTextView.topAnchor.constraint(equalTo: reviewLabel.bottomAnchor, constant: 5),
             reviewTextView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            reviewTextView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            reviewTextView.heightAnchor.constraint(equalToConstant: 200),
             
             evalLabel.topAnchor.constraint(equalTo: reviewTextView.bottomAnchor, constant: 20),
             evalLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
