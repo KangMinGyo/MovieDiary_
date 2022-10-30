@@ -34,9 +34,8 @@ class BoxOfficeDetailsViewController: UIViewController {
         let detailData = movieDetailDataList[index ?? 0]
         boxOfficeDetailsView.movieName.text = detailData.movieNm
         boxOfficeDetailsView.movieNameEn.text = detailData.movieNmEn
-        boxOfficeDetailsView.genres.text = "\(detailData.genres[0].genreNm) | "
+        boxOfficeDetailsView.genresAndShowTime.text = "\(detailData.genres[0].genreNm) | \(detailData.showTm)분"
         boxOfficeDetailsView.openDate.text = "\(data.openDt) 개봉"
-        boxOfficeDetailsView.showTime.text = "\(detailData.showTm)분"
         boxOfficeDetailsView.boxOfficeRank.text = "\(data.rank)"
         boxOfficeDetailsView.rankInten.text = boxOfficeHelper.rankIntenCal(data.rankInten)
         boxOfficeDetailsView.audiAcc.text = boxOfficeHelper.audiAccCal(data.audiAcc)

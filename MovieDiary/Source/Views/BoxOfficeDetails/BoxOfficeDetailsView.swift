@@ -9,6 +9,12 @@
 import UIKit
 
 class BoxOfficeDetailsView: UIView {
+    
+    let backdropImageView: UIImageView = {
+         let imageView = UIImageView()
+         imageView.translatesAutoresizingMaskIntoConstraints = false
+         return imageView
+     }()
 
     let posterImageView: UIImageView = {
          let imageView = UIImageView()
@@ -18,6 +24,8 @@ class BoxOfficeDetailsView: UIView {
 
     let movieName: UILabel = {
         let label = UILabel()
+        label.shadow()
+        label.textColor = .white
         label.font = .systemFont(ofSize: 15, weight: .bold)
         label.lineBreakMode = .byCharWrapping
         label.numberOfLines = 2
@@ -27,16 +35,19 @@ class BoxOfficeDetailsView: UIView {
     
     let movieNameEn: UILabel = {
         let label = UILabel()
+        label.shadow()
+        label.textColor = .white
         label.font = .systemFont(ofSize: 12)
         label.lineBreakMode = .byCharWrapping
         label.numberOfLines = 2
-        label.textColor = .systemGray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    let genres: UILabel = {
+    let genresAndShowTime: UILabel = {
         let label = UILabel()
+        label.shadow()
+        label.textColor = .white
         label.font = .systemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -44,18 +55,28 @@ class BoxOfficeDetailsView: UIView {
     
     let openDate: UILabel = {
         let label = UILabel()
+        label.shadow()
+        label.textColor = .white
         label.font = .systemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    let showTime: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 15)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    let movieStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 5
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
     
+    let movieInfoView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
     let lineView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGray6
@@ -109,7 +130,6 @@ class BoxOfficeDetailsView: UIView {
         return stackView
     }()
     
-    //전일대비 순위의 증감분
     let rankInten: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -178,10 +198,13 @@ class BoxOfficeDetailsView: UIView {
         return label
     }()
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
+        
+        [movieName, movieNameEn, genresAndShowTime, openDate].forEach {
+            self.movieStackView.addArrangedSubview($0)
+        }
         
         [boxOfficeRank, boxOfficeLabel].forEach {
             self.boxOfficeRankStackView.addArrangedSubview($0)
@@ -208,15 +231,13 @@ class BoxOfficeDetailsView: UIView {
     }
 
     func addView() {
+        addSubview(backdropImageView)
         addSubview(posterImageView)
-        addSubview(movieName)
-        addSubview(movieNameEn)
-        addSubview(genres)
-        addSubview(openDate)
-        addSubview(showTime)
+        addSubview(movieStackView)
         
+        addSubview(movieInfoView)
+        movieInfoView.addSubview(movieInfoStackView)
         addSubview(lineView)
-        lineView.addSubview(movieInfoStackView)
         
         addSubview(directorLabel)
         addSubview(directorImageView)
@@ -228,38 +249,35 @@ class BoxOfficeDetailsView: UIView {
     
     func configure() {
         NSLayoutConstraint.activate([
+            
+            backdropImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            backdropImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            backdropImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            backdropImageView.heightAnchor.constraint(equalToConstant: 300),
         
-            posterImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
             posterImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            posterImageView.bottomAnchor.constraint(equalTo: backdropImageView.bottomAnchor, constant: -20),
             posterImageView.heightAnchor.constraint(equalToConstant: 130),
             posterImageView.widthAnchor.constraint(equalToConstant: 90),
 
-            movieName.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
-            movieName.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 20),
-            movieName.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            
-            movieNameEn.topAnchor.constraint(equalTo: movieName.bottomAnchor, constant: 5),
-            movieNameEn.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 20),
-            movieNameEn.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            
-            genres.topAnchor.constraint(equalTo: movieNameEn.bottomAnchor, constant: 5),
-            genres.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 20),
-            
-            showTime.topAnchor.constraint(equalTo: movieNameEn.bottomAnchor, constant: 5),
-            showTime.leadingAnchor.constraint(equalTo: genres.trailingAnchor),
-            
-            openDate.topAnchor.constraint(equalTo: genres.bottomAnchor, constant: 5),
-            openDate.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 20),
+            movieStackView.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 20),
+            movieStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            movieStackView.bottomAnchor.constraint(equalTo: backdropImageView.bottomAnchor, constant: -20),
 
-            lineView.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 10),
-            lineView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            lineView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            lineView.heightAnchor.constraint(equalToConstant: 100),
+            movieInfoView.topAnchor.constraint(equalTo: backdropImageView.bottomAnchor),
+            movieInfoView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            movieInfoView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            movieInfoView.heightAnchor.constraint(equalToConstant: 100),
             
-            movieInfoStackView.centerXAnchor.constraint(equalTo: lineView.centerXAnchor),
-            movieInfoStackView.centerYAnchor.constraint(equalTo: lineView.centerYAnchor),
+            movieInfoStackView.centerXAnchor.constraint(equalTo: movieInfoView.centerXAnchor),
+            movieInfoStackView.centerYAnchor.constraint(equalTo: movieInfoView.centerYAnchor),
             
-            directorLabel.topAnchor.constraint(equalTo: lineView.bottomAnchor, constant: 20),
+            lineView.topAnchor.constraint(equalTo: movieInfoView.bottomAnchor),
+            lineView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            lineView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            lineView.heightAnchor.constraint(equalToConstant: 1),
+            
+            directorLabel.topAnchor.constraint(equalTo: movieInfoView.bottomAnchor, constant: 20),
             directorLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
             
             directorImageView.topAnchor.constraint(equalTo: directorLabel.bottomAnchor, constant: 10),
@@ -280,3 +298,12 @@ class BoxOfficeDetailsView: UIView {
     }
 }
 
+extension UILabel {
+    func shadow() {
+        layer.shadowOffset = CGSize(width: 5, height: 5)
+        layer.shadowOpacity = 0.7
+        layer.shadowRadius = 5
+        layer.shadowColor = UIColor.darkGray.cgColor
+        
+    }
+}
