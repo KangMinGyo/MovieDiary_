@@ -25,6 +25,15 @@ class MovieReviewListViewController: UIViewController {
         return f
     }()
     
+    lazy var settingButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"),
+                                     style: .plain,
+                                     target: self,
+                                     action: #selector(settingButtonPressed))
+        button.tintColor = .gray
+        return button
+    }()
+    
     lazy var movieSearchButton: UIBarButtonItem = {
         let button = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"),
                                      style: .plain,
@@ -47,6 +56,7 @@ class MovieReviewListViewController: UIViewController {
         super.viewDidLoad()
         
         title = "리뷰 목록"
+        navigationItem.leftBarButtonItem = settingButton
         navigationItem.rightBarButtonItems = [boxOfficeButton, movieSearchButton]
 
         addSubView()
@@ -75,6 +85,11 @@ class MovieReviewListViewController: UIViewController {
         movieReviewListView.MovieReviewListTableView.delegate = self
         movieReviewListView.MovieReviewListTableView.dataSource = self
         movieReviewListView.MovieReviewListTableView.register(MovieReviewListTableViewCell.self, forCellReuseIdentifier: "ReviewCell")
+    }
+    
+    @objc func settingButtonPressed() {
+        let nextVC = SettingViewController()
+        self.show(nextVC, sender: self)
     }
     
     @objc func boxOfficeButtonPressed() {
@@ -120,8 +135,10 @@ extension MovieReviewListViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let nextVC = MovieReviewDetailViewController()
         let data = reviewMetaDatas[indexPath.row]
+        let evalImage = ReviewHelper().evalImage(data.eval ?? "")
         nextVC.title = data.title
         nextVC.movieReviewDetailView.reviewTextView.text = data.contents
+        nextVC.movieReviewDetailView.evalImageView.image = UIImage(named: "\(evalImage)")
         self.show(nextVC, sender: self)
     }
     

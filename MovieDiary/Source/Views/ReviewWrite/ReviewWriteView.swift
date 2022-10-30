@@ -36,10 +36,17 @@ class ReviewWriteView: UIView {
     let rateButton: UIButton = {
         let button = UIButton(type: UIButton.ButtonType.system)
         button.backgroundColor = .systemBackground
-        button.setTitle("이 영화에 대해 평가해주세요.", for: UIControl.State.normal)
+        button.setTitle("이 영화에 대해 평가를 선택해주세요. ", for: UIControl.State.normal)
         button.tintColor = .black
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    let lineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemGray6
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     override init(frame: CGRect) {
@@ -57,6 +64,7 @@ class ReviewWriteView: UIView {
         addSubview(reviewTextView)
         addSubview(rateLabel)
         addSubview(rateButton)
+        addSubview(lineView)
     }
     
     func configure() {
@@ -76,6 +84,11 @@ class ReviewWriteView: UIView {
             rateButton.topAnchor.constraint(equalTo: rateLabel.bottomAnchor, constant: 5),
             rateButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             rateButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            
+            lineView.topAnchor.constraint(equalTo: rateButton.bottomAnchor, constant: 20),
+            lineView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            lineView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 20),
+            lineView.heightAnchor.constraint(equalToConstant: 1)
         ])
     }
 }
