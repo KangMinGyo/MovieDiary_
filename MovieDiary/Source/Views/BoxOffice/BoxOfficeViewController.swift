@@ -13,6 +13,7 @@ class BoxOfficeViewController: UIViewController {
     var boxOfficeDataList = [DailyBoxOfficeList]()
     var movieDetailDataList = [MovieInfo]()
     var moviePosterData = [String]()
+    var movieBackdropData = [String]()
     
     let posterBaseURL = "https://image.tmdb.org/t/p/original"
 
@@ -49,8 +50,10 @@ class BoxOfficeViewController: UIViewController {
                         let posterResponse = try await BoxOfficeService().getMoviePosterData(movieName: movieName)
                         if posterResponse.results.count == 0 {
                             moviePosterData.append(posterBaseURL)
+                            movieBackdropData.append(posterBaseURL)
                         } else {
                             moviePosterData.append(posterResponse.results[0].poster_path ?? "")
+                            movieBackdropData.append(posterResponse.results[0].backdrop_path ?? "")
                         }
                         
                     } catch {
@@ -119,6 +122,7 @@ extension BoxOfficeViewController: UITableViewDelegate, UITableViewDataSource {
         let nextVC = BoxOfficeDetailsViewController()
         let data = self.boxOfficeDataList[indexPath.row]
         let posterURL = self.moviePosterData[indexPath.row]
+        let backdropURL = self.movieBackdropData[indexPath.row]
         
         nextVC.boxOfficeDataList = boxOfficeDataList
         nextVC.movieDetailDataList = movieDetailDataList
@@ -128,6 +132,7 @@ extension BoxOfficeViewController: UITableViewDelegate, UITableViewDataSource {
             nextVC.boxOfficeDetailsView.posterImageView.setImageUrl(url: posterBaseURL, movieName: "noMovie")
         } else {
             nextVC.boxOfficeDetailsView.posterImageView.setImageUrl(url: "\(posterBaseURL)"+"\(posterURL)", movieName: data.movieNm)
+            nextVC.boxOfficeDetailsView.backdropImageView.setImageUrl(url: "\(posterBaseURL)"+"\(backdropURL)", movieName: "backdrop\(data.movieNm)")
         }
     
         self.show(nextVC, sender: self)

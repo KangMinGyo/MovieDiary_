@@ -12,5 +12,6 @@ struct MoviePosterData: Codable {
 }
 
 struct Results: Codable {
+    let backdrop_path: String?
     let poster_path : String?
 }
