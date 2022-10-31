@@ -10,13 +10,13 @@ import Foundation
 struct ReviewHelper {
     func evalImage(_ eval: String) -> String {
         if eval == "인생영화" {
-            return "eval_best"
+            return "best"
         } else if eval == "꿀잼영화" {
-            return "eval_good"
+            return "good"
         } else if eval == "보통영화" {
-            return "eval_notbad"
+            return "notbad"
         } else {
-            return "eval_bad"
+            return "bad"
         }
     }
 }
