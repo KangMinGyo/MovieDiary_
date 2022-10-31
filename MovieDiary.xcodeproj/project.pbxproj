@@ -43,7 +43,6 @@
 		8CDB8AE7290EB4290088D972 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDB8AE6290EB4290088D972 /* SettingViewController.swift */; };
 		8CDB8AEA290EB43E0088D972 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDB8AE9290EB43E0088D972 /* SettingView.swift */; };
 		8CDB8AEE290EC7ED0088D972 /* MessageUI+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDB8AED290EC7ED0088D972 /* MessageUI+Extension.swift */; };
-		8CDB8AF0290FB6B60088D972 /* UIImageView+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDB8AEF290FB6B60088D972 /* UIImageView+Cache.swift */; };
 		8CDB8AF2290FC4DB0088D972 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDB8AF1290FC4DB0088D972 /* Date+Extension.swift */; };
 		8CDB8AF4290FCBCF0088D972 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDB8AF3290FCBCF0088D972 /* UIImage+Extension.swift */; };
 /* End PBXBuildFile section */
@@ -106,7 +105,6 @@
 		8CDB8AE6290EB4290088D972 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		8CDB8AE9290EB43E0088D972 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		8CDB8AED290EC7ED0088D972 /* MessageUI+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageUI+Extension.swift"; sourceTree = "<group>"; };
-		8CDB8AEF290FB6B60088D972 /* UIImageView+Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Cache.swift"; sourceTree = "<group>"; };
 		8CDB8AF1290FC4DB0088D972 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		8CDB8AF3290FCBCF0088D972 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -280,7 +278,6 @@
 			children = (
 				8CDB8AB42906C6550088D972 /* UIImageView+Extension.swift */,
 				8CDB8AED290EC7ED0088D972 /* MessageUI+Extension.swift */,
-				8CDB8AEF290FB6B60088D972 /* UIImageView+Cache.swift */,
 				8CDB8AF1290FC4DB0088D972 /* Date+Extension.swift */,
 				8CDB8AF3290FCBCF0088D972 /* UIImage+Extension.swift */,
 			);
@@ -516,7 +513,6 @@
 				8CDB8AD2290AC0980088D972 /* CoreDataManger.swift in Sources */,
 				8CDB8ADD290C05550088D972 /* MovieReviewDetailView.swift in Sources */,
 				8CDB8AAD2906C6430088D972 /* BoxOfficeService.swift in Sources */,
-				8CDB8AF0290FB6B60088D972 /* UIImageView+Cache.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
