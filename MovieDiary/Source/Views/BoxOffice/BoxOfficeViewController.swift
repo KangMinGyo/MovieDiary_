@@ -110,7 +110,7 @@ extension BoxOfficeViewController: UITableViewDelegate, UITableViewDataSource {
             if self.moviePosterData.count != 10 {
                 cell.posterImageView.setImageUrl(url: self.posterBaseURL, movieName: "noPoster")
                 
-            }else {
+            } else {
                 cell.posterImageView.setImageUrl(url: "\(self.posterBaseURL)"+"\(self.moviePosterData[indexPath.row])", movieName: data.movieNm)
             }
         }
@@ -118,24 +118,4 @@ extension BoxOfficeViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let nextVC = BoxOfficeDetailsViewController()
-        let data = self.boxOfficeDataList[indexPath.row]
-        let posterURL = self.moviePosterData[indexPath.row]
-        let backdropURL = self.movieBackdropData[indexPath.row]
-        
-        nextVC.boxOfficeDataList = boxOfficeDataList
-        nextVC.movieDetailDataList = movieDetailDataList
-        nextVC.index = indexPath.row
-        
-        DispatchQueue.main.async {
-            if posterURL == self.posterBaseURL {
-                nextVC.boxOfficeDetailsView.posterImageView.setImageUrl(url: self.posterBaseURL, movieName: "noMovie")
-            } else {
-                nextVC.boxOfficeDetailsView.posterImageView.setImageUrl(url: "\(self.posterBaseURL)"+"\(posterURL)", movieName: data.movieNm)
-                nextVC.boxOfficeDetailsView.backdropImageView.setImageUrl(url: "\(self.posterBaseURL)"+"\(backdropURL)", movieName: "backdrop\(data.movieNm)")
-            }
-        }
-        self.show(nextVC, sender: self)
-    }
 }

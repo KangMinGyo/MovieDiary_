@@ -10,11 +10,11 @@ import UIKit
 class BoxOfficeView: UIView {
     
     let boxOfficeTableView: UITableView = {
-         let tableView = UITableView()
-         tableView.rowHeight = 150
-         tableView.translatesAutoresizingMaskIntoConstraints = false
-         return tableView
-     }()
+        let tableView = UITableView()
+        tableView.rowHeight = 150
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
