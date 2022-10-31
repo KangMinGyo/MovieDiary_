@@ -16,17 +16,9 @@ class MovieReviewListViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
-    let formatter: DateFormatter = {
-        let f = DateFormatter()
-        f.dateStyle = .long
-        f.timeStyle = .short
-        f.locale = Locale(identifier: "ko_kr")
-        return f
-    }()
-    
+        
     lazy var settingButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"),
+        let button = UIBarButtonItem(image: UIImage(systemName: .gearshape),
                                      style: .plain,
                                      target: self,
                                      action: #selector(settingButtonPressed))
@@ -35,7 +27,7 @@ class MovieReviewListViewController: UIViewController {
     }()
     
     lazy var movieSearchButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"),
+        let button = UIBarButtonItem(image: UIImage(systemName: .magnifyingglass),
                                      style: .plain,
                                      target: self,
                                      action: #selector(movieSearchButtonPressed))
@@ -44,7 +36,7 @@ class MovieReviewListViewController: UIViewController {
     }()
     
     lazy var boxOfficeButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(image: UIImage(systemName: "chart.bar"),
+        let button = UIBarButtonItem(image: UIImage(systemName: .chart),
                                      style: .plain,
                                      target: self,
                                      action: #selector(boxOfficeButtonPressed))
@@ -128,7 +120,7 @@ extension MovieReviewListViewController: UITableViewDelegate, UITableViewDataSou
         let data = reviewMetaDatas[indexPath.row]
         cell.movieNameLabel.text = data.title
         cell.movieInfoLabel.text = data.movieInfo
-        cell.recordDateLabel.text = formatter.string(from: data.date!)
+        cell.recordDateLabel.text = Date().reviewDate()
         return cell
     }
     
