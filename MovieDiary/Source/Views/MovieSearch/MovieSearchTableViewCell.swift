@@ -69,6 +69,7 @@ class MovieSearchTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }

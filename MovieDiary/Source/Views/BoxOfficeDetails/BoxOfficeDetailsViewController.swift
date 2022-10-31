@@ -39,8 +39,6 @@ class BoxOfficeDetailsViewController: UIViewController {
         boxOfficeDetailsView.boxOfficeRank.text = "\(data.rank)"
         boxOfficeDetailsView.rankInten.text = boxOfficeHelper.rankIntenCal(data.rankInten)
         boxOfficeDetailsView.audiAcc.text = boxOfficeHelper.audiAccCal(data.audiAcc)
-        boxOfficeDetailsView.directorName.text = detailData.directors[0].peopleNm
-        boxOfficeDetailsView.actorName.text = boxOfficeHelper.actorNameHelper(detailData.actors)
     }
     
     func addSubView() {

@@ -21,22 +21,9 @@ struct MovieInfo: Codable {
     let showTm: String //상영시간
     let openDt: String //개봉날짜
     let genres: [Genres] //장르
-    let directors: [Directors] //감독
-    let actors: [Actors] //배우
 }
 
 struct Genres: Codable {
     let genreNm: String
 }
 
-struct Directors: Codable {
-    let peopleNm: String
-}
-
-struct Actors: Codable {
-    let peopleNm: String
-}
-
-struct Audits: Codable {
-    let watchGradeNm: String
-}

@@ -37,7 +37,7 @@ class BoxOfficeViewController: UIViewController {
     func fetchData() {
         Task {
             do {
-                let movieResponse = try await BoxOfficeService().getBoxOfficeData(date: boxOfficeHelper.yesterdayDate())
+                let movieResponse = try await BoxOfficeService().getBoxOfficeData(date: Date().yesterdayDate())
                 boxOfficeDataList.append(contentsOf: movieResponse.boxOfficeResult.dailyBoxOfficeList)
                 boxOfficeView.boxOfficeTableView.reloadData()
                 print(boxOfficeDataList[0].audiAcc)
@@ -45,7 +45,7 @@ class BoxOfficeViewController: UIViewController {
                     let movieCode = boxOfficeDataList[index].movieCd
                     let movieDetailResponse = try await BoxOfficeService().getMovieDetailData(movieCode: movieCode).movieInfoResult.movieInfo
                     movieDetailDataList.append(movieDetailResponse)
-                    let movieName = boxOfficeHelper.movieNameHelper(boxOfficeDataList[index].movieNm)
+                    let movieName = boxOfficeDataList[index].movieNm
                     do {
                         let posterResponse = try await BoxOfficeService().getMoviePosterData(movieName: movieName)
                         if posterResponse.results.count == 0 {
@@ -108,7 +108,7 @@ extension BoxOfficeViewController: UITableViewDelegate, UITableViewDataSource {
 
         DispatchQueue.main.async {
             if self.moviePosterData.count != 10 {
-                cell.posterImageView.setImageUrl(url: self.posterBaseURL, movieName: "noMovie")
+                cell.posterImageView.setImageUrl(url: self.posterBaseURL, movieName: "noPoster")
                 
             }else {
                 cell.posterImageView.setImageUrl(url: "\(self.posterBaseURL)"+"\(self.moviePosterData[indexPath.row])", movieName: data.movieNm)
@@ -128,13 +128,14 @@ extension BoxOfficeViewController: UITableViewDelegate, UITableViewDataSource {
         nextVC.movieDetailDataList = movieDetailDataList
         nextVC.index = indexPath.row
         
-        if posterURL == posterBaseURL {
-            nextVC.boxOfficeDetailsView.posterImageView.setImageUrl(url: posterBaseURL, movieName: "noMovie")
-        } else {
-            nextVC.boxOfficeDetailsView.posterImageView.setImageUrl(url: "\(posterBaseURL)"+"\(posterURL)", movieName: data.movieNm)
-            nextVC.boxOfficeDetailsView.backdropImageView.setImageUrl(url: "\(posterBaseURL)"+"\(backdropURL)", movieName: "backdrop\(data.movieNm)")
+        DispatchQueue.main.async {
+            if posterURL == self.posterBaseURL {
+                nextVC.boxOfficeDetailsView.posterImageView.setImageUrl(url: self.posterBaseURL, movieName: "noMovie")
+            } else {
+                nextVC.boxOfficeDetailsView.posterImageView.setImageUrl(url: "\(self.posterBaseURL)"+"\(posterURL)", movieName: data.movieNm)
+                nextVC.boxOfficeDetailsView.backdropImageView.setImageUrl(url: "\(self.posterBaseURL)"+"\(backdropURL)", movieName: "backdrop\(data.movieNm)")
+            }
         }
-    
         self.show(nextVC, sender: self)
     }
 }

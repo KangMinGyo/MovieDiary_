@@ -103,7 +103,6 @@ extension MovieSearchViewController: UISearchBarDelegate {
         movieSearchList = [MovieList]()
         fetchData(movieName ?? "")
         
-        //검색 완료시 키보드 내리기
         searchBar.resignFirstResponder()
     }
 }

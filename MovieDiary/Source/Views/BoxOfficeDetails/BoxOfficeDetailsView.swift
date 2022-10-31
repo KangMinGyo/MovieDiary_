@@ -15,11 +15,11 @@ class BoxOfficeDetailsView: UIView {
          imageView.translatesAutoresizingMaskIntoConstraints = false
          return imageView
      }()
-
+    
     let posterImageView: UIImageView = {
-         let imageView = UIImageView()
-         imageView.translatesAutoresizingMaskIntoConstraints = false
-         return imageView
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
      }()
 
     let movieName: UILabel = {
@@ -161,43 +161,6 @@ class BoxOfficeDetailsView: UIView {
         return stackView
     }()
     
-    let directorLabel: UILabel = {
-        let label = UILabel()
-        label.text = "감독"
-        label.font = .systemFont(ofSize: 20, weight: .bold)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
-    let directorImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "Director")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
-    let directorName: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    let actorLabel: UILabel = {
-        let label = UILabel()
-        label.text = "출연진"
-        label.font = .systemFont(ofSize: 20, weight: .bold)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    let actorName: UILabel = {
-        let label = UILabel()
-        label.lineBreakMode = .byCharWrapping
-        label.numberOfLines = 10
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
@@ -238,13 +201,6 @@ class BoxOfficeDetailsView: UIView {
         addSubview(movieInfoView)
         movieInfoView.addSubview(movieInfoStackView)
         addSubview(lineView)
-        
-        addSubview(directorLabel)
-        addSubview(directorImageView)
-        addSubview(directorName)
-        
-        addSubview(actorLabel)
-        addSubview(actorName)
     }
     
     func configure() {
@@ -276,24 +232,6 @@ class BoxOfficeDetailsView: UIView {
             lineView.leadingAnchor.constraint(equalTo: leadingAnchor),
             lineView.trailingAnchor.constraint(equalTo: trailingAnchor),
             lineView.heightAnchor.constraint(equalToConstant: 1),
-            
-            directorLabel.topAnchor.constraint(equalTo: movieInfoView.bottomAnchor, constant: 20),
-            directorLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            
-            directorImageView.topAnchor.constraint(equalTo: directorLabel.bottomAnchor, constant: 10),
-            directorImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 30),
-            directorImageView.widthAnchor.constraint(equalToConstant: 50),
-            directorImageView.heightAnchor.constraint(equalToConstant: 50),
-            
-            directorName.leadingAnchor.constraint(equalTo: directorImageView.trailingAnchor, constant: 5),
-            directorName.centerYAnchor.constraint(equalTo: directorImageView.centerYAnchor),
-        
-            actorLabel.topAnchor.constraint(equalTo: directorImageView.bottomAnchor, constant: 20),
-            actorLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            
-            actorName.topAnchor.constraint(equalTo: actorLabel.bottomAnchor, constant: 10),
-            actorName.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            actorName.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20)
         ])
     }
 }
