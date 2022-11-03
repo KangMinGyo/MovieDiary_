@@ -11,6 +11,14 @@ class MovieReviewListViewController: UIViewController {
     
     var reviewMetaDatas = [ReviewMetaData]()
     
+    let formatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateStyle = .long
+        f.timeStyle = .short
+        f.locale = Locale(identifier: "ko_kr")
+        return f
+    }()
+    
     let movieReviewListView: MovieReviewListView = {
         let view = MovieReviewListView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -120,7 +128,7 @@ extension MovieReviewListViewController: UITableViewDelegate, UITableViewDataSou
         let data = reviewMetaDatas[indexPath.row]
         cell.movieNameLabel.text = data.title
         cell.movieInfoLabel.text = data.movieInfo
-        cell.recordDateLabel.text = Date().reviewDate()
+        cell.recordDateLabel.text = formatter.string(for: data.date)
         return cell
     }
     

@@ -8,13 +8,6 @@
 import Foundation
 
 extension Date {
-    func reviewDate() -> String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .short
-        formatter.locale = Locale(identifier: "ko_kr")
-        return formatter.string(from: self)
-    }
     
     //어제 날짜 구하기
     func yesterdayDate() -> String {
