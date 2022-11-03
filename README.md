@@ -49,6 +49,7 @@
 
 ## BoxOffice
 <img width="290" alt="스크린샷 2022-10-22 오후 4 19 56" src="https://user-images.githubusercontent.com/98341623/199761105-c1ed5fee-027d-42a1-b3b1-790ee4c2aba6.PNG">
+
 ### 1. TableView를 이용해 박스오피스 순위를 보여줍니다.
 1. Poster Image
 2. 영화 제목
