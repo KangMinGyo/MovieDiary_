@@ -24,9 +24,9 @@ protocol CoreDataManagerProtocol {
     
 }
 
-class CoreDataManger: CoreDataManagerProtocol {
+class CoreDataManager: CoreDataManagerProtocol {
 
-    static let shared = CoreDataManger()
+    static let shared = CoreDataManager()
     private init() { }
     
     // MARK: - Core Data stack

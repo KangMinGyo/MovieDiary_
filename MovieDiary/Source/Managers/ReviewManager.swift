@@ -9,10 +9,13 @@ import Foundation
 
 protocol ReviewManagerProtocol {
     
+    ///Review 저장을 요청합니다.
     func saveReview(title: String, contents: String, movieInfo: String, eval: String, completion: @escaping (Result<ReviewMetaData, Error>) -> ())
     
+    ///저장된 리뷰의 목록을 요청합니다.
     func loadReviews(start: Int, completion: @escaping (Result<[ReviewMetaData], Error>) -> ())
     
+    ///저장된 리뷰의 삭제를 요청합니다.
     func deleteReview(data: ReviewMetaData, completion: @escaping (Result<Void, Error>) -> ())
 
 }
@@ -26,12 +29,12 @@ class ReviewManager: ReviewManagerProtocol {
     func saveReview(title: String, contents: String, movieInfo: String, eval: String, completion: @escaping (Result<ReviewMetaData, Error>) -> ()) {
         DispatchQueue.global().async {
             do {
-                let metaData = try CoreDataManger.shared.createNewReview(
+                let metaData = try CoreDataManager.shared.createNewReview(
                     title: title,
                     contents: contents,
                     movieInfo: movieInfo,
                     eval: eval)
-                try CoreDataManger.shared.insertReviewMataData(metaData)
+                try CoreDataManager.shared.insertReviewMataData(metaData)
                 DispatchQueue.main.async {
                     completion(.success(metaData))
                 }
@@ -46,7 +49,7 @@ class ReviewManager: ReviewManagerProtocol {
     func loadReviews(start: Int, completion: @escaping (Result<[ReviewMetaData], Error>) -> ()) {
         DispatchQueue.global().async {
             do {
-                let metaDatas = try CoreDataManger.shared.fetchReviewMataData(start: start)
+                let metaDatas = try CoreDataManager.shared.fetchReviewMataData(start: start)
                 DispatchQueue.main.async {
                     completion(.success(metaDatas))
                 }
@@ -61,7 +64,7 @@ class ReviewManager: ReviewManagerProtocol {
     func deleteReview(data: ReviewMetaData, completion: @escaping (Result<Void, Error>) -> ()) {
         DispatchQueue.global().async {
             do {
-                try CoreDataManger.shared.deleteReviewMetaData(data)
+                try CoreDataManager.shared.deleteReviewMetaData(data)
                 DispatchQueue.main.async {
                     completion(.success(()))
                 }
