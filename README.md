@@ -1,10 +1,5 @@
 # MovieDiary
 
-## 👩🏻‍💻제작
-
-### 강민교
-<img src="https://user-images.githubusercontent.com/61138164/194685598-2fb5ef98-a001-44d2-b020-50554b1cf939.png" width="200" height="200"/></img>
-
 ## 💻 기능구현방식 & 📱구현화면
 
 ## 리뷰 목록
