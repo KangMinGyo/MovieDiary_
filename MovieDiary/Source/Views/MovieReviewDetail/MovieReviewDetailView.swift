@@ -11,7 +11,7 @@ class MovieReviewDetailView: UIView {
     
     let reviewLabel: UILabel = {
         let label = UILabel()
-        label.text = "나의 리뷰"
+        label.text = I18NString.SubTitle.myReview
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -33,7 +33,7 @@ class MovieReviewDetailView: UIView {
     
     let evalLabel: UILabel = {
         let label = UILabel()
-        label.text = "나의 평가"
+        label.text = I18NString.SubTitle.myRate
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -47,7 +47,7 @@ class MovieReviewDetailView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .white
+        backgroundColor = .systemBackground
         
         addView()
         configure()
@@ -89,3 +89,4 @@ class MovieReviewDetailView: UIView {
         ])
     }
 }
+

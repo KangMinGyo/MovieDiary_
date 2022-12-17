@@ -26,7 +26,7 @@ class BoxOfficeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "박스오피스 순위"
+        title = I18NString.Title.boxOfficeTitle
 
         fetchData()
         addSubView()
@@ -40,7 +40,6 @@ class BoxOfficeViewController: UIViewController {
                 let movieResponse = try await BoxOfficeService().getBoxOfficeData(date: Date().yesterdayDate())
                 boxOfficeDataList.append(contentsOf: movieResponse.boxOfficeResult.dailyBoxOfficeList)
                 boxOfficeView.boxOfficeTableView.reloadData()
-                print(boxOfficeDataList[0].audiAcc)
                 for index in 0..<boxOfficeDataList.count {
                     let movieCode = boxOfficeDataList[index].movieCd
                     let movieDetailResponse = try await BoxOfficeService().getMovieDetailData(movieCode: movieCode).movieInfoResult.movieInfo
@@ -117,5 +116,4 @@ extension BoxOfficeViewController: UITableViewDelegate, UITableViewDataSource {
 
         return cell
     }
-
 }

@@ -11,14 +11,14 @@ class ReviewWriteView: UIView {
     
     let reviewLabel: UILabel = {
         let label = UILabel()
-        label.text = "나의 리뷰"
+        label.text = I18NString.SubTitle.myReview
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let reviewTextView: UITextView = {
         let textView = UITextView()
-        textView.text = "내용을 입력해주세요."
+        textView.text = I18NString.Explanation.reviewView
         textView.textColor = .lightGray
         textView.backgroundColor = .systemGray6
         textView.isScrollEnabled = false
@@ -28,7 +28,7 @@ class ReviewWriteView: UIView {
     
     let rateLabel: UILabel = {
         let label = UILabel()
-        label.text = "나의 평가"
+        label.text = I18NString.SubTitle.myRate
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -36,8 +36,8 @@ class ReviewWriteView: UIView {
     let rateButton: UIButton = {
         let button = UIButton(type: UIButton.ButtonType.system)
         button.backgroundColor = .systemBackground
-        button.setTitle("이 영화에 대해 평가를 선택해주세요. ", for: UIControl.State.normal)
-        button.tintColor = .black
+        button.setTitle(I18NString.Explanation.rateButton, for: UIControl.State.normal)
+        button.tintColor = .systemGray2
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -92,4 +92,3 @@ class ReviewWriteView: UIView {
         ])
     }
 }
-

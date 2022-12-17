@@ -16,6 +16,7 @@ extension SettingViewController: MFMailComposeViewControllerDelegate {
             composeViewController.mailComposeDelegate = self
             
             let bodyString = """
+                                    Please write your content here
                                     이곳에 내용을 작성해주세요.
                                     
                                     -------------------
@@ -28,7 +29,7 @@ extension SettingViewController: MFMailComposeViewControllerDelegate {
                                     """
             
             composeViewController.setToRecipients(["kang15567@gmail.com"])
-            composeViewController.setSubject("MovieDiary 문의 및 의견")
+            composeViewController.setSubject(I18NString.mail.feedback)
             composeViewController.setMessageBody(bodyString, isHTML: false)
             
             self.present(composeViewController, animated: true, completion: nil)
@@ -45,7 +46,7 @@ extension SettingViewController: MFMailComposeViewControllerDelegate {
                     }
                 }
             }
-            let cancleAction = UIAlertAction(title: "취소", style: .destructive, handler: nil)
+            let cancleAction = UIAlertAction(title: "Cencel", style: .destructive, handler: nil)
             
             sendMailErrorAlert.addAction(goAppStoreAction)
             sendMailErrorAlert.addAction(cancleAction)

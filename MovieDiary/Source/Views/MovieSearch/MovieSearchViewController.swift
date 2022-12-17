@@ -21,6 +21,7 @@ class MovieSearchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = I18NString.Title.movieSearchTitle
 
         addSubView()
         configure()
@@ -52,7 +53,7 @@ class MovieSearchViewController: UIViewController {
         searchBar.delegate = self
         searchBar.frame = (CGRect(x: 0, y: 0, width: 200, height: 70))
         searchBar.searchBarStyle = .minimal
-        searchBar.placeholder = "영화이름을 검색해주세요"
+        searchBar.placeholder = I18NString.Explanation.searchBar
     }
     
     func addSubView() {

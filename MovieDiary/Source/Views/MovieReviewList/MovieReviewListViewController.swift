@@ -55,7 +55,7 @@ class MovieReviewListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "리뷰 목록"
+        title = I18NString.Title.reviewList
         navigationItem.leftBarButtonItem = settingButton
         navigationItem.rightBarButtonItems = [boxOfficeButton, movieSearchButton]
 
