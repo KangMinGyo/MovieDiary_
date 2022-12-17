@@ -18,8 +18,10 @@ class SettingView: UIView {
     
     let askButton: UIButton = {
         let button = UIButton(type: UIButton.ButtonType.system)
-        button.setTitle("문의하기", for: .normal)
-        button.tintColor = .black
+        button.setTitle(I18NString.mail.feedback, for: .normal)
+        button.contentHorizontalAlignment = .leading
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
+        button.tintColor = .gray
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -66,3 +68,4 @@ class SettingView: UIView {
         ])
     }
 }
+

@@ -18,8 +18,9 @@ class SettingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .white
+
+        title = I18NString.Title.setting
+        view.backgroundColor = .systemBackground
         
         addSubView()
         configure()
@@ -44,4 +45,3 @@ class SettingViewController: UIViewController {
         ])
     }
 }
-

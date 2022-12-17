@@ -15,7 +15,7 @@ class ReviewWriteViewController: UIViewController {
     var eval = ""
     
     lazy var registerButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(title: "등록",
+        let button = UIBarButtonItem(title: I18NString.Button.saveButton,
                                      style: .plain,
                                      target: self,
                                      action: #selector(registerButtonPressed))
@@ -33,42 +33,42 @@ class ReviewWriteViewController: UIViewController {
         super.viewDidLoad()
 
         title = movieName
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         navigationItem.rightBarButtonItem = registerButton
         reviewWriteView.reviewTextView.delegate = self
         
         addSubView()
         configure()
         
-        reviewWriteView.rateButton.addTarget(self, action: #selector(reteButtonPressed), for: .touchUpInside)
+        reviewWriteView.rateButton.addTarget(self, action: #selector(rateButtonPressed), for: .touchUpInside)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
     
-    @objc func reteButtonPressed() {
-        let actionSheet = UIAlertController(title: "영화는 어땠나요?", message: nil, preferredStyle: .actionSheet)
+    @objc func rateButtonPressed() {
+        let actionSheet = UIAlertController(title: I18NString.SubTitle.actionSheet, message: nil, preferredStyle: .actionSheet)
         
-        let bestMovie = UIAlertAction(title: "인생영화", style: .default) { [weak self] (action) in
+        let bestMovie = UIAlertAction(title: I18NString.actionSheet.best, style: .default) { [weak self] (action) in
             self?.reviewWriteView.rateButton.setTitle(action.title, for: .normal)
             self?.eval = action.title ?? ""
         }
         actionSheet.addAction(bestMovie)
 
-        let goodMovie = UIAlertAction(title: "꿀잼영화", style: .default) { [weak self] (action) in
+        let goodMovie = UIAlertAction(title: I18NString.actionSheet.good, style: .default) { [weak self] (action) in
             self?.reviewWriteView.rateButton.setTitle(action.title, for: .normal)
             self?.eval = action.title ?? ""
         }
         actionSheet.addAction(goodMovie)
         
-        let normalMovie = UIAlertAction(title: "보통영화", style: .default) { [weak self] (action) in
+        let normalMovie = UIAlertAction(title: I18NString.actionSheet.notbad, style: .default) { [weak self] (action) in
             self?.reviewWriteView.rateButton.setTitle(action.title, for: .normal)
             self?.eval = action.title ?? ""
         }
         actionSheet.addAction(normalMovie)
         
-        let badMovie = UIAlertAction(title: "최악영화", style: .default) { [weak self] (action) in
+        let badMovie = UIAlertAction(title: I18NString.actionSheet.bad, style: .default) { [weak self] (action) in
             self?.reviewWriteView.rateButton.setTitle(action.title, for: .normal)
             self?.eval = action.title ?? ""
         }
@@ -81,8 +81,8 @@ class ReviewWriteViewController: UIViewController {
     @objc func registerButtonPressed() {
         contents = reviewWriteView.reviewTextView.text
         
-        if contents.isEmpty || contents == "내용을 입력해주세요." {
-            let alert = UIAlertController(title: "잠깐!", message: "나의 리뷰를 입력해주세요", preferredStyle: .alert)
+        if contents.isEmpty || contents == I18NString.Explanation.reviewView {
+            let alert = UIAlertController(title: I18NString.Alert.contentsTitle, message: I18NString.Alert.contensMessage, preferredStyle: .alert)
             let ok = UIAlertAction(title: "OK", style: .default) { (ok) in
             }
             alert.addAction(ok)
@@ -91,7 +91,7 @@ class ReviewWriteViewController: UIViewController {
         }
         
         if eval == "" {
-            let alert = UIAlertController(title: "잠깐!", message: "영화 평가를 해주세요", preferredStyle: .alert)
+            let alert = UIAlertController(title: I18NString.Alert.contentsTitle, message: I18NString.Alert.contensMessage2, preferredStyle: .alert)
             let ok = UIAlertAction(title: "OK", style: .default) { (ok) in
             }
             alert.addAction(ok)
@@ -130,7 +130,7 @@ extension ReviewWriteViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if reviewWriteView.reviewTextView.textColor == UIColor.lightGray {
             reviewWriteView.reviewTextView.text = ""
-            reviewWriteView.reviewTextView.textColor = UIColor.black
+            reviewWriteView.reviewTextView.textColor = UIColor.systemGray
             }
     }
     

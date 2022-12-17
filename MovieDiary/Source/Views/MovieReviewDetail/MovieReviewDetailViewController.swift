@@ -17,7 +17,7 @@ class MovieReviewDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         addSubView()
         configure()
         
